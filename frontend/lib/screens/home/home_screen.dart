@@ -8,6 +8,7 @@ import '../../widgets/progress_card.dart';
 import '../../widgets/streak_card.dart';
 import '../../widgets/todays_workout_card.dart';
 import '../../widgets/welcome_card.dart';
+import '../nutrition/nutrition_screen.dart';
 import '../progress/progress_screen.dart';
 import '../workout/ai_workout_planner_screen.dart';
 
@@ -31,7 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = FitFlowDestination.home.index;
 
   void _onDestinationSelected(int index) {
-    // Plan and Progress have screens; remaining tabs only update selection.
+    // Plan, Progress and Nutrition have screens; remaining tabs only update
+    // selection.
     if (index == FitFlowDestination.plan.index) {
       Navigator.of(context).push(
         MaterialPageRoute(builder: (_) => const AiWorkoutPlannerScreen()),
@@ -41,6 +43,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (index == FitFlowDestination.progress.index) {
       Navigator.of(context).push(
         MaterialPageRoute(builder: (_) => const ProgressScreen()),
+      );
+      return;
+    }
+    if (index == FitFlowDestination.nutrition.index) {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const NutritionScreen()),
       );
       return;
     }

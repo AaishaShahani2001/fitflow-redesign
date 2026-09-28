@@ -5,6 +5,7 @@ import '../../core/theme/app_theme.dart';
 import '../../models/workout_plan.dart';
 import '../../widgets/app_card.dart';
 import '../../widgets/fitflow_bottom_navigation.dart';
+import '../nutrition/nutrition_screen.dart';
 import '../progress/progress_screen.dart';
 import 'ai_workout_result_screen.dart';
 
@@ -57,8 +58,8 @@ class _AiWorkoutPlannerScreenState extends State<AiWorkoutPlannerScreen> {
   WorkoutPlan? _currentPlan;
 
   void _onDestinationSelected(int index) {
-    // Home returns to the dashboard. Progress opens its own screen. Remaining
-    // tabs only update the selected state until their screens exist.
+    // Home returns to the dashboard. Progress and Nutrition open their
+    // screens. Remaining tabs only update the selected state.
     if (index == FitFlowDestination.home.index) {
       Navigator.of(context).maybePop();
       return;
@@ -66,6 +67,12 @@ class _AiWorkoutPlannerScreenState extends State<AiWorkoutPlannerScreen> {
     if (index == FitFlowDestination.progress.index) {
       Navigator.of(context).push(
         MaterialPageRoute(builder: (_) => const ProgressScreen()),
+      );
+      return;
+    }
+    if (index == FitFlowDestination.nutrition.index) {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const NutritionScreen()),
       );
       return;
     }

@@ -6,6 +6,7 @@ import '../../models/progress_data.dart';
 import '../../widgets/app_card.dart';
 import '../../widgets/fitflow_bottom_navigation.dart';
 import '../../widgets/workout_line_chart.dart';
+import '../nutrition/nutrition_screen.dart';
 import '../workout/ai_workout_planner_screen.dart';
 import 'monthly_summary_screen.dart';
 import 'weekly_summary_screen.dart';
@@ -33,6 +34,12 @@ class _ProgressScreenState extends State<ProgressScreen> {
     if (index == FitFlowDestination.plan.index) {
       Navigator.of(context).push(
         MaterialPageRoute(builder: (_) => const AiWorkoutPlannerScreen()),
+      );
+      return;
+    }
+    if (index == FitFlowDestination.nutrition.index) {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const NutritionScreen()),
       );
       return;
     }

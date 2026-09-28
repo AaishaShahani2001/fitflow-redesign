@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:frontend/main.dart';
+import 'package:frontend/screens/nutrition/nutrition_screen.dart';
 import 'package:frontend/screens/progress/progress_screen.dart';
 import 'package:frontend/screens/workout/ai_workout_planner_screen.dart';
 
@@ -54,6 +55,22 @@ void main() {
 
     expect(find.byType(ProgressScreen), findsOneWidget);
     expect(find.text('Workouts'), findsWidgets);
+  });
+
+  testWidgets('Nutrition opens the Nutrition dashboard', (tester) async {
+    await tester.pumpWidget(const FitFlowApp());
+
+    await tester.tap(
+      find.descendant(
+        of: find.byType(NavigationBar),
+        matching: find.text('Nutrition'),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byType(NutritionScreen), findsOneWidget);
+    expect(find.text("Today's Nutrition"), findsOneWidget);
+    expect(find.text('1,450 / 2,000 kcal'), findsOneWidget);
   });
 
   testWidgets('Tapping a destination without a screen updates the selection', (
