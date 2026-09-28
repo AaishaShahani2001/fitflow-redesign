@@ -89,8 +89,53 @@ abstract final class AppTheme {
           ),
         ),
       ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: AppColors.primaryDark,
+          backgroundColor: AppColors.card,
+          side: const BorderSide(color: AppColors.border),
+          minimumSize: const Size(0, 48),
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.button),
+          ),
+          textStyle: const TextStyle(
+            fontSize: 14.5,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.1,
+          ),
+        ),
+      ),
       iconButtonTheme: IconButtonThemeData(
         style: IconButton.styleFrom(foregroundColor: AppColors.heading),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: AppColors.card,
+        isDense: true,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.lg,
+          vertical: AppSpacing.lg,
+        ),
+        hintStyle: _textTheme.bodyLarge?.copyWith(
+          color: AppColors.secondaryText,
+        ),
+        border: _inputBorder(AppColors.border),
+        enabledBorder: _inputBorder(AppColors.border),
+        focusedBorder: _inputBorder(AppColors.primary, width: 1.6),
+        disabledBorder: _inputBorder(AppColors.border),
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: AppColors.card,
+        surfaceTintColor: Colors.transparent,
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.card),
+        ),
+        titleTextStyle: _textTheme.titleLarge,
+        contentTextStyle: _textTheme.bodyLarge?.copyWith(
+          color: AppColors.secondaryText,
+        ),
       ),
       progressIndicatorTheme: const ProgressIndicatorThemeData(
         color: AppColors.progressAccent,
@@ -141,6 +186,13 @@ abstract final class AppTheme {
           ),
         ),
       ),
+    );
+  }
+
+  static OutlineInputBorder _inputBorder(Color color, {double width = 1}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppRadius.button),
+      borderSide: BorderSide(color: color, width: width),
     );
   }
 

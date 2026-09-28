@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:frontend/main.dart';
+import 'package:frontend/screens/workout/ai_workout_planner_screen.dart';
 
 void main() {
   testWidgets('Home dashboard renders its main sections', (tester) async {
@@ -28,15 +29,33 @@ void main() {
     expect(find.text("Starting today's workout..."), findsOneWidget);
   });
 
-  testWidgets('Tapping a destination updates the selection', (tester) async {
+  testWidgets('Plan opens the AI Workout Planner', (tester) async {
     await tester.pumpWidget(const FitFlowApp());
 
     await tester.tap(find.text('Plan'));
     await tester.pumpAndSettle();
 
+    expect(find.byType(AiWorkoutPlannerScreen), findsOneWidget);
+    expect(find.text('Goal'), findsOneWidget);
+    expect(find.text('Injuries / Limitations'), findsOneWidget);
+  });
+
+  testWidgets('Tapping a destination without a screen updates the selection', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const FitFlowApp());
+
+    await tester.tap(
+      find.descendant(
+        of: find.byType(NavigationBar),
+        matching: find.text('Progress'),
+      ),
+    );
+    await tester.pumpAndSettle();
+
     final navigationBar = tester.widget<NavigationBar>(
       find.byType(NavigationBar),
     );
-    expect(navigationBar.selectedIndex, 1);
+    expect(navigationBar.selectedIndex, 2);
   });
 }

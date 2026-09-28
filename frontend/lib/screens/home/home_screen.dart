@@ -8,6 +8,7 @@ import '../../widgets/progress_card.dart';
 import '../../widgets/streak_card.dart';
 import '../../widgets/todays_workout_card.dart';
 import '../../widgets/welcome_card.dart';
+import '../workout/ai_workout_planner_screen.dart';
 
 /// Static placeholder data until real user data is wired up.
 const String _userName = 'Shan';
@@ -29,6 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = FitFlowDestination.home.index;
 
   void _onDestinationSelected(int index) {
+    // Plan is the only destination with a screen so far; Home stays selected
+    // underneath so returning from it lands back on the dashboard.
+    if (index == FitFlowDestination.plan.index) {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const AiWorkoutPlannerScreen()),
+      );
+      return;
+    }
     if (index == _selectedIndex) return;
     setState(() => _selectedIndex = index);
   }

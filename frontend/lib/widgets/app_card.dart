@@ -13,6 +13,8 @@ class AppCard extends StatelessWidget {
     this.padding = const EdgeInsets.all(AppSpacing.xl),
     this.onTap,
     this.semanticLabel,
+    this.color,
+    this.borderColor,
   });
 
   final Widget child;
@@ -20,15 +22,19 @@ class AppCard extends StatelessWidget {
   final VoidCallback? onTap;
   final String? semanticLabel;
 
+  /// Defaults to the white card surface; tint it for highlighted cards.
+  final Color? color;
+  final Color? borderColor;
+
   @override
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(AppRadius.card);
 
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: AppColors.card,
+        color: color ?? AppColors.card,
         borderRadius: borderRadius,
-        border: Border.all(color: AppColors.border),
+        border: Border.all(color: borderColor ?? AppColors.border),
         boxShadow: const [
           BoxShadow(
             color: AppColors.cardShadow,
