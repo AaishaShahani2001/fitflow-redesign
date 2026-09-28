@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:frontend/main.dart';
+import 'package:frontend/screens/progress/progress_screen.dart';
 import 'package:frontend/screens/workout/ai_workout_planner_screen.dart';
 
 void main() {
@@ -40,9 +41,7 @@ void main() {
     expect(find.text('Injuries / Limitations'), findsOneWidget);
   });
 
-  testWidgets('Tapping a destination without a screen updates the selection', (
-    tester,
-  ) async {
+  testWidgets('Progress opens the Progress dashboard', (tester) async {
     await tester.pumpWidget(const FitFlowApp());
 
     await tester.tap(
@@ -53,9 +52,26 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    expect(find.byType(ProgressScreen), findsOneWidget);
+    expect(find.text('Workouts'), findsWidgets);
+  });
+
+  testWidgets('Tapping a destination without a screen updates the selection', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const FitFlowApp());
+
+    await tester.tap(
+      find.descendant(
+        of: find.byType(NavigationBar),
+        matching: find.text('Community'),
+      ),
+    );
+    await tester.pumpAndSettle();
+
     final navigationBar = tester.widget<NavigationBar>(
       find.byType(NavigationBar),
     );
-    expect(navigationBar.selectedIndex, 2);
+    expect(navigationBar.selectedIndex, 3);
   });
 }
